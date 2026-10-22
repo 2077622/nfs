@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#FFB6C1">
+<meta name="description" content="给任馨雨的 19 岁生日互动祝福">
+<title>任馨雨，19岁生日快乐 🎂</title>
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* =========================================================
+   0. 主题变量：改颜色只改这里
+   ========================================================= */
+:root{
+  --pink:#FFB6C1;          /* 主色 · 樱花粉 */
+  --blue:#BDE0FE;          /* 辅色 · 奶蓝 */
+  --yellow:#FFD6A5;        /* 点缀 · 奶黄 */
+  --cream:#FFF9FB;         /* 奶油白 */
+  --ink:#5A4A4A;           /* 文字 · 暖深棕（禁用纯黑） */
+  --line:#5A4A4A;          /* 手绘描边 */
+  --edge:#F0C9D6;          /* 卡片描边 */
+  --bounce:cubic-bezier(.34,1.56,.64,1);   /* 弹性缓动 */
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --safe-l:env(safe-area-inset-left,0px);
+  --safe-r:env(safe-area-inset-right,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;padding:0}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Yuanti SC","Quicksand",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(178deg,#FFD5E2 0%,#FFE6EE 32%,#FFF7FA 62%,#E9F3FF 100%);
+  overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;
+  -webkit-font-smoothing:antialiased;
+}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.layer{position:absolute;inset:0;pointer-events:none;z-index:12}
+#app{position:fixed;inset:0;overflow:hidden;touch-action:none}
+
+/* =========================================================
+   1. 背景装饰：云朵 / 星星 / 彩带
+   ========================================================= */
+.bg-deco{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.cloud{position:absolute;color:#fff;opacity:.7;animation:drift linear infinite}
+.c1{left:-8%;top:8%;width:34vw;animation-duration:52s}
+.c2{right:-10%;top:24%;width:26vw;opacity:.55;animation-duration:68s;animation-direction:reverse}
+.c3{left:6%;top:52%;width:22vw;opacity:.45;animation-duration:80s}
+@keyframes drift{0%{transform:translateX(-6vw)}50%{transform:translateX(6vw)}100%{transform:translateX(-6vw)}}
+.star{position:absolute;width:18px;height:18px;animation:twinkle 2.8s ease-in-out infinite}
+.s1{left:9%;top:14%}.s2{right:12%;top:10%;width:14px;height:14px;animation-delay:.4s}
+.s3{left:20%;top:38%;width:12px;height:12px;animation-delay:.9s}
+.s4{right:8%;top:44%;width:20px;height:20px;animation-delay:1.3s}
+.s5{left:6%;top:66%;width:13px;height:13px;animation-delay:.6s}
+.s6{right:18%;top:70%;width:16px;height:16px;animation-delay:1.8s}
+@keyframes twinkle{0%,100%{opacity:.25;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(18deg)}}
+.streamer{position:absolute;top:-4vh;width:70px;opacity:.5}
+.st-l{left:2vw;animation:sway 6s ease-in-out infinite}
+.st-r{right:2vw;transform:scaleX(-1);animation:sway 7.5s ease-in-out infinite reverse}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
+.st-r{transform-origin:top center}
+
+/* =========================================================
+   2. 开场屏
+   ========================================================= */
+#intro{position:absolute;inset:0;z-index:40;display:none;place-items:center;text-align:center;
+  padding:calc(var(--safe-t) + 24px) 24px calc(var(--safe-b) + 24px);
+  background:radial-gradient(circle at 50% 32%,#FFF8FA 0%,#FFE4EC 52%,#FFD2E0 100%)}
+html.js #intro{display:grid}
+#intro.gone{opacity:0;transform:scale(1.08);pointer-events:none;transition:opacity .6s ease,transform .6s var(--bounce)}
+.intro-cake{width:min(62vw,240px);margin:0 auto;animation:cakeFloat 4s ease-in-out infinite;
+  filter:drop-shadow(0 16px 26px rgba(214,140,166,.38))}
+.intro-cake svg{width:100%;height:auto;overflow:visible}
+.intro-title{margin:14px 0 0;font-size:clamp(16px,4.6vw,20px);line-height:1.9;font-weight:600;letter-spacing:1px}
+.intro-title b{display:block;font-size:clamp(26px,8.4vw,40px);font-weight:900;letter-spacing:2px;
+  color:#FF7FA5;text-shadow:0 3px 0 #fff,0 10px 22px rgba(255,143,171,.35)}
+.tap-hint{margin-top:22px;border:2.5px solid var(--line);background:#fff;color:var(--ink);font:inherit;
+  font-size:clamp(16px,4.8vw,20px);font-weight:800;letter-spacing:1px;padding:14px 34px;border-radius:999px;
+  box-shadow:0 7px 0 #F3B9C9,0 16px 28px rgba(214,140,166,.32);animation:breathe 1.7s var(--bounce) infinite;cursor:pointer}
+.tap-hint:active{transform:translateY(5px);box-shadow:0 2px 0 #F3B9C9}
+@keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-13px) scale(1.05)}}
+
+/* =========================================================
+   3. 主场景骨架
+   ========================================================= */
+#stage{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;
+  padding:calc(var(--safe-t) + 12px) calc(16px + var(--safe-r)) calc(var(--safe-b) + 10px) calc(16px + var(--safe-l))}
+html.js #stage{opacity:0;transition:opacity .7s ease}
+html.js #stage.on{opacity:1}
+html.js .stagger{animation:popIn .85s var(--bounce) both;animation-delay:var(--d,0s)}
+@keyframes popIn{from{opacity:0;transform:translateY(26px) scale(.86)}to{opacity:1;transform:none}}
+@keyframes cakeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+.header{position:relative;z-index:6;text-align:center;margin-top:2px}
+.header h1{margin:0;font-size:clamp(20px,6.4vw,31px);font-weight:900;line-height:1.5;letter-spacing:.6px;
+  text-shadow:0 2px 0 rgba(255,255,255,.85)}
+.header .hint{margin:6px 0 0;font-size:clamp(11px,3.2vw,13px);line-height:1.8;opacity:.72;font-weight:600}
+
+/* ---------- 祝福卡片（横向滑动） ---------- */
+.cards{position:relative;z-index:6;width:min(88vw,332px);margin:clamp(8px,2.2vh,18px) 0 0;overflow:hidden}
+.cards-track{display:flex;will-change:transform;transform:translateX(0)}
+.card{flex:0 0 100%;background:rgba(255,255,255,.9);border:2.5px solid var(--edge);border-radius:26px;
+  padding:clamp(14px,4vw,20px) clamp(16px,4.6vw,22px);min-height:clamp(146px,23vh,190px);
+  box-shadow:0 12px 28px rgba(214,140,166,.24);display:flex;flex-direction:column;justify-content:center;gap:9px;text-align:center}
+.card .tag{align-self:center;font-size:11px;font-weight:800;letter-spacing:1.4px;padding:4px 12px;border-radius:999px;
+  background:var(--cream);border:1.6px solid var(--edge);color:#D98BA4}
+.card p{margin:0;font-size:clamp(13.5px,3.9vw,16px);line-height:2;letter-spacing:.3px;font-weight:500}
+.card p.big{font-size:clamp(16px,4.8vw,20px);font-weight:800;line-height:1.8;color:#FF7FA5}
+.card .emoji{font-size:clamp(22px,6.4vw,28px);line-height:1}
+.sign{margin:12px 0 0;text-align:center;font-size:clamp(12.5px,3.6vw,15px);font-weight:700;letter-spacing:1px;opacity:.8}
+.sign-slot{border-bottom:2px dashed #E3B9C7;padding:0 10px 2px;font-weight:800;color:#D98BA4}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.dot{width:9px;height:9px;padding:0;border:none;border-radius:999px;background:#EFC9D5;cursor:pointer;transition:all .35s var(--bounce)}
+.dot.on{width:24px;background:var(--pink);box-shadow:0 0 0 2px #fff,0 0 10px rgba(255,182,193,.9)}
+
+/* ---------- 蛋糕 ---------- */
+.cake-wrap{position:relative;z-index:5;margin-top:auto;width:min(70vw,282px);text-align:center;
+  animation:cakeFloat 4.6s ease-in-out infinite}
+.cake-halo{position:absolute;left:50%;top:58%;width:126%;aspect-ratio:1/1;transform:translate(-50%,-50%);
+  border-radius:50%;pointer-events:none;animation:halo 3.6s ease-in-out infinite;
+  background:radial-gradient(circle,rgba(255,214,165,.5) 0%,rgba(255,182,193,.2) 44%,transparent 70%)}
+@keyframes halo{0%,100%{opacity:.65;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.cake{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 14px 22px rgba(214,140,166,.34))}
+.cake-wrap.bounce .cake{animation:cakeBounce 1s var(--bounce) 3}
+@keyframes cakeBounce{0%,100%{transform:translateY(0) scale(1)}28%{transform:translateY(-24px) scale(1.05,.96)}
+  56%{transform:translateY(0) scale(.96,1.05)}76%{transform:translateY(-8px) scale(1.01,.99)}}
+.candle{cursor:pointer}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flicker 1.05s ease-in-out infinite;
+  transition:opacity .32s ease,transform .32s ease}
+.flame-glow{animation:glowPulse 1.6s ease-in-out infinite}
+@keyframes flicker{0%,100%{transform:scale(1) rotate(-2.5deg)}50%{transform:scale(1.13,.93) rotate(2.5deg)}}
+@keyframes glowPulse{0%,100%{opacity:.45}50%{opacity:.8}}
+.candle.blowing .flame{transform:scale(.62,.8) translateY(3px);opacity:.75}
+.candle.out .flame{opacity:0;transform:translateY(-10px) scale(.15)}
+.smoke{opacity:0;transform-box:fill-box;transform-origin:50% 100%}
+.candle.out .smoke{animation:smoke 1.5s ease-out forwards}
+@keyframes smoke{0%{opacity:0;transform:translateY(0) scale(.5)}25%{opacity:.6}100%{opacity:0;transform:translateY(-26px) scale(1.5)}}
+.cake-tip{margin:6px 0 0;font-size:clamp(11.5px,3.4vw,13.5px);font-weight:700;opacity:.75;letter-spacing:.5px}
+
+/* ---------- 吹气力度指示条 ---------- */
+.blow-meter{display:flex;align-items:center;justify-content:center;gap:8px;margin:7px auto 0;
+  max-width:min(70vw,260px);opacity:0;transform:translateY(6px);
+  transition:opacity .5s ease,transform .5s var(--bounce)}
+.blow-meter.on{opacity:1;transform:none}
+.bm-track{position:relative;flex:1 1 auto;height:12px;border-radius:999px;background:#FCE7EE;
+  border:2px solid var(--edge);overflow:hidden}
+.bm-fill{position:absolute;left:0;top:0;bottom:0;width:0%;border-radius:999px;
+  background:linear-gradient(90deg,var(--yellow),var(--pink) 60%,#FF8FAB);
+  transition:width .07s linear}
+.blow-meter.strong .bm-fill{background:linear-gradient(90deg,var(--pink),#FF8FAB 55%,#FF6F96)}
+.bm-label{flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:.6px;opacity:.7;white-space:nowrap}
+.mic-btn{margin:9px auto 0;display:inline-block;border:2px solid var(--line);background:#fff;color:var(--ink);
+  font:inherit;font-size:clamp(11.5px,3.3vw,13px);font-weight:800;letter-spacing:.6px;
+  padding:7px 16px;border-radius:999px;box-shadow:0 4px 0 #F3B9C9;cursor:pointer;
+  transition:transform .3s var(--bounce),background .3s ease}
+.mic-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #F3B9C9}
+.mic-btn.listening{background:var(--pink);color:#fff;border-color:var(--line);
+  animation:micPulse 1.8s ease-in-out infinite}
+.mic-btn.denied{background:#F6F0F0;color:#B49A9A;border-color:#DFCFCF;box-shadow:0 4px 0 #EADDDD}
+@keyframes micPulse{0%,100%{box-shadow:0 4px 0 #E39AAB,0 0 0 0 rgba(255,143,171,.5)}
+  50%{box-shadow:0 4px 0 #E39AAB,0 0 0 9px rgba(255,143,171,0)}}
+
+/* =========================================================
+   4. 气球
+   ========================================================= */
+.balloon{position:absolute;left:0;top:0;pointer-events:auto;cursor:grab;will-change:transform;
+  filter:drop-shadow(0 8px 12px rgba(214,140,166,.3));z-index:11}
+.balloon svg{display:block;width:100%;height:100%;overflow:visible}
+.balloon.grab{cursor:grabbing;filter:drop-shadow(0 14px 18px rgba(214,140,166,.42))}
+.balloon.shake svg{animation:shake .55s ease}
+@keyframes shake{0%,100%{transform:rotate(0)}18%{transform:rotate(-11deg) scale(1.06)}
+  38%{transform:rotate(9deg) scale(1.03)}58%{transform:rotate(-6deg)}78%{transform:rotate(4deg)}}
+
+/* =========================================================
+   5. 粒子 / 涟漪 / 彩纸
+   ========================================================= */
+.pt{position:absolute;left:0;top:0;will-change:transform,opacity;pointer-events:none}
+.pt svg{display:block;width:100%;height:100%;overflow:visible}
+.ripple{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;
+  border:2.5px solid rgba(255,182,193,.95);box-shadow:0 0 16px rgba(255,214,165,.85);
+  animation:ripple .7s ease-out forwards;pointer-events:none}
+@keyframes ripple{0%{transform:scale(.4);opacity:.95}100%{transform:scale(7);opacity:0}}
+.confetti{position:absolute;top:-24px;width:10px;height:14px;border-radius:4px;
+  animation:confettiFall 3.2s linear forwards;pointer-events:none}
+.confetti.ribbon{width:6px;height:22px;border-radius:3px}
+.confetti.round{width:11px;height:11px;border-radius:50%}
+@keyframes confettiFall{
+  0%{transform:translate3d(0,-4vh,0) rotate(0);opacity:0}
+  10%{opacity:1}
+  100%{transform:translate3d(var(--dx),104vh,0) rotate(var(--rot));opacity:.2}}
+
+/* =========================================================
+   6. 庆祝层 & 双击彩蛋
+   ========================================================= */
+#celebrate{position:absolute;inset:0;z-index:30;display:none;place-items:center;text-align:center;
+  padding:calc(var(--safe-t) + 20px) 20px calc(var(--safe-b) + 20px);
+  background:rgba(255,236,243,.66);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+#celebrate.on{display:grid;animation:fadeIn .45s ease both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.celebrate-card{width:min(88vw,340px);background:#fff;border:3px solid var(--edge);border-radius:32px;
+  padding:clamp(20px,6vw,28px) clamp(18px,5.4vw,24px);box-shadow:0 22px 54px rgba(214,140,166,.4);
+  animation:popIn .85s var(--bounce) both;max-height:86vh;overflow:auto}
+.celebrate-card .cc-emoji{font-size:clamp(34px,11vw,48px);line-height:1}
+.celebrate-card h2{margin:8px 0 10px;font-size:clamp(20px,6.2vw,27px);font-weight:900;letter-spacing:1px;color:#FF7FA5}
+.celebrate-card p{margin:0 0 10px;font-size:clamp(13.5px,3.9vw,16px);line-height:2;font-weight:500}
+.celebrate-card .cc-food{display:inline-block;background:var(--yellow);border:2px solid #EFC79A;border-radius:999px;
+  padding:7px 16px;font-size:clamp(12.5px,3.6vw,14.5px);font-weight:800;color:#8A6A3C}
+.btn{margin-top:16px;border:2.5px solid var(--line);background:var(--pink);color:#fff;font:inherit;
+  font-size:clamp(14px,4.2vw,17px);font-weight:800;letter-spacing:1px;padding:12px 28px;border-radius:999px;
+  box-shadow:0 6px 0 #E39AAB;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .5s ease,transform .5s var(--bounce)}
+.btn.show{opacity:1;pointer-events:auto;transform:none}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #E39AAB}
+
+#dblEgg{position:absolute;inset:0;z-index:35;display:grid;place-items:center;pointer-events:none;opacity:0;text-align:center}
+#dblEgg.on{animation:eggShow 2s ease forwards}
+.dbl-glow{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,214,165,.75),rgba(255,182,193,.4) 40%,transparent 72%);
+  animation:glowFlash .7s ease-in-out 2}
+@keyframes glowFlash{0%,100%{opacity:.25}50%{opacity:1}}
+.dbl-text{position:relative;font-family:"Xingkai SC","Kaiti SC","STKaiti","KaiTi","DFPKaiSho-SB",cursive;
+  font-size:clamp(34px,11.5vw,60px);font-weight:700;line-height:1.35;color:#FF7FA5;transform:rotate(-5deg);
+  text-shadow:0 3px 0 #fff,0 4px 0 #FFE1EA,0 14px 30px rgba(255,143,171,.5);padding:0 18px}
+.dbl-text small{display:block;font-size:.42em;letter-spacing:4px;margin-top:8px;color:#E8A0B6;font-weight:700}
+@keyframes eggShow{0%{opacity:0;transform:scale(.65)}16%{opacity:1;transform:scale(1.08)}
+  30%{transform:scale(1)}82%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.04)}}
+
+/* ---------- 无 JS 降级 ---------- */
+.nojs{position:relative;z-index:50;padding:calc(var(--safe-t) + 40px) 28px calc(var(--safe-b) + 40px);text-align:center}
+.nojs .nbox{background:#fff;border:3px solid var(--edge);border-radius:28px;padding:26px 20px;
+  box-shadow:0 16px 40px rgba(214,140,166,.3)}
+.nojs h1{margin:0 0 12px;font-size:24px;color:#FF7FA5}
+.nojs p{margin:0 0 10px;line-height:2;font-size:15px}
+
+/* ---------- 减弱动效降级 ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .bg-deco,.cake-halo{opacity:.5}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 内联 SVG 图标库（零外部图片） ===== -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="ico-heart" viewBox="0 0 24 24">
+    <path d="M12 21.2S2.8 14.9 2.8 9.1A5.3 5.3 0 0 1 12 5.6a5.3 5.3 0 0 1 9.2 3.5c0 5.8-9.2 12.1-9.2 12.1z"
+      fill="#FF8FAB" stroke="#5A4A4A" stroke-width="1.4" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="ico-star" viewBox="0 0 24 24">
+    <path d="M12 2.4l2.9 6.1 6.7.9-4.9 4.7 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.4 9.4l6.7-.9z"
+      fill="#FFD6A5" stroke="#5A4A4A" stroke-width="1.3" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="ico-sparkle" viewBox="0 0 24 24">
+    <path d="M12 1.6c1.1 6.2 4.6 9.7 10.4 10.4-5.8.8-9.3 4.3-10.4 10.4C10.9 16.1 7.4 12.6 1.6 12 7.4 11.3 10.9 7.8 12 1.6z"
+      fill="#FFF0B8" stroke="#E8B96F" stroke-width="1"/>
+  </symbol>
+  <symbol id="ico-cake" viewBox="0 0 24 24">
+    <rect x="3.4" y="12" width="17.2" height="9.4" rx="3.6" fill="#FFB6C1" stroke="#5A4A4A" stroke-width="1.3"/>
+    <path d="M3.8 15.6q2.7 3 5.4 0t5.4 0 5.4 0" fill="none" stroke="#FFF3F6" stroke-width="1.9" stroke-linecap="round"/>
+    <rect x="10.8" y="5.6" width="2.4" height="6.2" rx="1.2" fill="#BDE0FE" stroke="#5A4A4A" stroke-width="1"/>
+    <path d="M12 1.6c1.9 2.1 1.9 3.6 0 4.4-1.9-.8-1.9-2.3 0-4.4z" fill="#FFD6A5" stroke="#5A4A4A" stroke-width="1"/>
+  </symbol>
+  <symbol id="ico-fork" viewBox="0 0 24 24">
+    <g fill="none" stroke="#C08C9B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7.6 2.6v6a3.6 3.6 0 0 0 7.2 0v-6"/><path d="M11.2 2.6v6.4"/><path d="M11.2 12.4V21.4"/>
+    </g>
+  </symbol>
+  <symbol id="ico-spoon" viewBox="0 0 24 24">
+    <g stroke="#C08C9B" stroke-width="2" stroke-linecap="round" fill="none">
+      <ellipse cx="11.6" cy="7" rx="4.6" ry="5.4" fill="#FFE9D6"/><path d="M11.6 12.6V21.4"/>
+    </g>
+  </symbol>
+  <symbol id="ico-cloud" viewBox="0 0 120 60">
+    <path d="M24 54C10 54 4 45 8 37c3-7 12-8 16-4 1-12 12-19 22-15 6-9 22-9 27 2 12-3 22 6 19 16 5 4 3 18-10 18z"
+      fill="#FFFFFF" stroke="#F2DAE2" stroke-width="3" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<div id="app">
+
+  <!-- ===== 背景装饰层 ===== -->
+  <div class="bg-deco" aria-hidden="true">
+    <svg class="cloud c1" viewBox="0 0 120 60"><use href="#ico-cloud"/></svg>
+    <svg class="cloud c2" viewBox="0 0 120 60"><use href="#ico-cloud"/></svg>
+    <svg class="cloud c3" viewBox="0 0 120 60"><use href="#ico-cloud"/></svg>
+    <svg class="star s1" viewBox="0 0 24 24"><use href="#ico-star"/></svg>
+    <svg class="star s2" viewBox="0 0 24 24"><use href="#ico-sparkle"/></svg>
+    <svg class="star s3" viewBox="0 0 24 24"><use href="#ico-star"/></svg>
+    <svg class="star s4" viewBox="0 0 24 24"><use href="#ico-sparkle"/></svg>
+    <svg class="star s5" viewBox="0 0 24 24"><use href="#ico-star"/></svg>
+    <svg class="star s6" viewBox="0 0 24 24"><use href="#ico-sparkle"/></svg>
+    <svg class="streamer st-l" viewBox="0 0 60 220"><path d="M14 0C44 40-6 72 22 112 46 148 4 168 24 220" fill="none" stroke="#FFD6A5" stroke-width="8" stroke-linecap="round"/></svg>
+    <svg class="streamer st-r" viewBox="0 0 60 220"><path d="M14 0C44 40-6 72 22 112 46 148 4 168 24 220" fill="none" stroke="#BDE0FE" stroke-width="8" stroke-linecap="round"/></svg>
+  </div>
+
+  <!-- ===== 主场景 ===== -->
+  <main id="stage">
+    <header class="header stagger" style="--d:.1s">
+      <h1>任馨雨，19岁生日快乐 🎂</h1>
+      <p class="hint">轻触屏幕有惊喜 · 对着屏幕用力吹气吹灭蜡烛 · 气球可以拖着玩</p>
+    </header>
+
+    <!-- 祝福卡片：横向滑动切换 3 句 -->
+    <section class="cards stagger" id="swiper" data-no-ripple style="--d:.28s" aria-label="生日祝福卡片">
+      <div class="cards-track" id="track">
+        <article class="card">
+          <span class="tag">TO 任馨雨</span>
+          <p>任馨雨，19岁生日快乐呀！愿你每天都被美食和好心情包围，像粉色一样软软甜甜，永远闪闪发光 ✨</p>
+        </article>
+        <article class="card">
+          <span class="tag">美食特权</span>
+          <p class="emoji">🍰🍜🍓🧋</p>
+          <p class="big">今天想吃什么都安排上！</p>
+          <p>从第一口甜的开始，一整年都不许饿肚子。</p>
+        </article>
+        <article class="card">
+          <span class="tag">今日穿搭</span>
+          <p class="emoji">🩷🧥</p>
+          <p>那件粉色卫衣，今天也是全场最衬你的颜色。</p>
+          <p>软软的、暖暖的，和你一模一样。</p>
+        </article>
+      </div>
+      <div class="dots" id="dots"></div>
+      <!-- ✏️ 落款：把下面 span 里的文字换成你的名字即可 -->
+      <p class="sign">—— <span class="sign-slot">聂凡胜</span></p>
+    </section>
+
+    <!-- 双层生日蛋糕（纯内联 SVG） -->
+    <div class="cake-wrap stagger" id="cakeWrap" style="--d:.46s">
+      <div class="cake-halo"></div>
+      <svg class="cake" viewBox="0 0 240 220" role="img" aria-label="双层生日蛋糕，有三根蜡烛">
+        <!-- 兔耳朵 -->
+        <g stroke="#5A4A4A" stroke-width="2.4" stroke-linejoin="round">
+          <g transform="rotate(-17 80 84)"><ellipse cx="80" cy="70" rx="10" ry="27" fill="#FFF9FB"/><ellipse cx="80" cy="72" rx="4.6" ry="18" fill="#FFB6C1" stroke="none"/></g>
+          <g transform="rotate(17 160 84)"><ellipse cx="160" cy="70" rx="10" ry="27" fill="#FFF9FB"/><ellipse cx="160" cy="72" rx="4.6" ry="18" fill="#FFB6C1" stroke="none"/></g>
+        </g>
+        <!-- 盘子 -->
+        <ellipse cx="120" cy="208" rx="94" ry="11" fill="#FFE3EC" stroke="#5A4A4A" stroke-width="2.5"/>
+        <!-- 下层 -->
+        <rect x="36" y="142" width="168" height="62" rx="22" fill="#FFF1F5" stroke="#5A4A4A" stroke-width="2.5"/>
+        <g fill="#FFB6C1" opacity=".85">
+          <circle cx="62" cy="184" r="4.5"/><circle cx="92" cy="192" r="3.6"/><circle cx="150" cy="192" r="3.6"/><circle cx="180" cy="184" r="4.5"/>
+        </g>
+        <text x="120" y="192" text-anchor="middle" font-size="24" font-weight="900" fill="#FF9EB8" stroke="#5A4A4A" stroke-width="1">19</text>
+        <!-- 下层奶油垂滴 -->
+        <path d="M36 142h168v10a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0a8.4 8.4 0 0 1-16.8 0z"
+          fill="#FFF9FB" stroke="#5A4A4A" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- 上层 -->
+        <rect x="62" y="92" width="116" height="56" rx="20" fill="#FFB6C1" stroke="#5A4A4A" stroke-width="2.5"/>
+        <!-- 上层奶油垂滴 -->
+        <path d="M62 92h116v8a7.25 7.25 0 0 1-14.5 0a7.25 7.25 0 0 1-14.5 0a7.25 7.25 0 0 1-14.5 0a7.25 7.25 0 0 1-14.5 0a7.25 7.25 0 0 1-14.5 0a7.25 7.25 0 0 1-14.5 0a7.25 7.25 0 0 1-14.5 0a7.25 7.25 0 0 1-14.5 0z"
+          fill="#FFF9FB" stroke="#5A4A4A" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- 三根蜡烛 -->
+        <g class="candle" data-no-ripple>
+          <rect x="90.5" y="56" width="11" height="38" rx="5.5" fill="#BDE0FE" stroke="#5A4A4A" stroke-width="2.2"/>
+          <path d="M96 56v-6" stroke="#5A4A4A" stroke-width="2.2" stroke-linecap="round"/>
+          <path class="smoke" d="M96 50c-5-7 5-9 0-16" fill="none" stroke="#C9BDBD" stroke-width="2.4" stroke-linecap="round"/>
+          <g class="flame"><ellipse class="flame-glow" cx="96" cy="42" rx="14" ry="17" fill="#FFD6A5"/>
+            <path d="M96 28c7.5 8.5 8 15 2.5 19.5-2 1.6-4.6 1.6-6.5.4 2.4-1.2 3.4-3.2 2.4-5.3-4.4 3.2-8.9.2-8.4-5 .4-4.4 4.6-7.6 10-9.6z" fill="#FF9E6B" stroke="#5A4A4A" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M96 39c3.2 4.2 3 7.6-.4 9.6-3-2-2.6-5.6.4-9.6z" fill="#FFE9B0"/></g>
+        </g>
+        <g class="candle" data-no-ripple>
+          <rect x="114.5" y="50" width="11" height="44" rx="5.5" fill="#FFD6A5" stroke="#5A4A4A" stroke-width="2.2"/>
+          <path d="M120 50v-6" stroke="#5A4A4A" stroke-width="2.2" stroke-linecap="round"/>
+          <path class="smoke" d="M120 44c-5-7 5-9 0-16" fill="none" stroke="#C9BDBD" stroke-width="2.4" stroke-linecap="round"/>
+          <g class="flame"><ellipse class="flame-glow" cx="120" cy="36" rx="14" ry="17" fill="#FFD6A5"/>
+            <path d="M120 22c7.5 8.5 8 15 2.5 19.5-2 1.6-4.6 1.6-6.5.4 2.4-1.2 3.4-3.2 2.4-5.3-4.4 3.2-8.9.2-8.4-5 .4-4.4 4.6-7.6 10-9.6z" fill="#FF9E6B" stroke="#5A4A4A" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M120 33c3.2 4.2 3 7.6-.4 9.6-3-2-2.6-5.6.4-9.6z" fill="#FFE9B0"/></g>
+        </g>
+        <g class="candle" data-no-ripple>
+          <rect x="138.5" y="56" width="11" height="38" rx="5.5" fill="#FFF1F5" stroke="#5A4A4A" stroke-width="2.2"/>
+          <path d="M144 56v-6" stroke="#5A4A4A" stroke-width="2.2" stroke-linecap="round"/>
+          <path class="smoke" d="M144 50c-5-7 5-9 0-16" fill="none" stroke="#C9BDBD" stroke-width="2.4" stroke-linecap="round"/>
+          <g class="flame"><ellipse class="flame-glow" cx="144" cy="42" rx="14" ry="17" fill="#FFD6A5"/>
+            <path d="M144 28c7.5 8.5 8 15 2.5 19.5-2 1.6-4.6 1.6-6.5.4 2.4-1.2 3.4-3.2 2.4-5.3-4.4 3.2-8.9.2-8.4-5 .4-4.4 4.6-7.6 10-9.6z" fill="#FF9E6B" stroke="#5A4A4A" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M144 39c3.2 4.2 3 7.6-.4 9.6-3-2-2.6-5.6.4-9.6z" fill="#FFE9B0"/></g>
+        </g>
+        <!-- 顶部小爱心 -->
+        <path d="M120 78s-6.4-4.4-6.4-8.4a3.7 3.7 0 0 1 6.4-2.4 3.7 3.7 0 0 1 6.4 2.4c0 4-6.4 8.4-6.4 8.4z" fill="#FF8FAB" stroke="#5A4A4A" stroke-width="1.6"/>
+      </svg>
+      <p class="cake-tip" id="cakeTip">对着屏幕用力吹一口气，许个愿 🕯️</p>
+      <!-- 吹气力度指示条：麦克风实时音量可视化 -->
+      <div class="blow-meter" id="blowMeter" aria-hidden="true">
+        <div class="bm-track"><div class="bm-fill" id="blowFill"></div></div>
+        <span class="bm-label" id="blowLabel">吹气力度</span>
+      </div>
+      <button class="mic-btn" id="micBtn" type="button" data-no-ripple>🎤 开启吹气</button>
+    </div>
+  </main>
+
+  <!-- 气球层 / 特效层 -->
+  <div id="balloonLayer" class="layer" style="z-index:11"></div>
+  <div id="fxLayer" class="layer"></div>
+
+  <!-- ===== 开场屏 ===== -->
+  <div id="intro">
+    <div class="intro-inner">
+      <div class="intro-cake" id="introCake"></div>
+      <p class="intro-title">送给 任馨雨 的<b>19 岁生日惊喜</b></p>
+      <button class="tap-hint" id="startBtn" type="button">点开它 👆</button>
+    </div>
+  </div>
+
+  <!-- ===== 庆祝层 ===== -->
+  <div id="celebrate" aria-hidden="true">
+    <div class="celebrate-card">
+      <div class="cc-emoji">🎉🎂🎈</div>
+      <h2>愿望已发送成功！</h2>
+      <p>任馨雨，19岁生日快乐呀！愿你每天都被美食和好心情包围，像粉色一样软软甜甜，永远闪闪发光 ✨</p>
+      <p class="cc-food">今天想吃什么都安排上！</p>
+      <p class="sign">—— <span class="sign-slot">聂凡胜</span></p>
+      <button class="btn" id="replayBtn" type="button">再玩一次 🎈</button>
+    </div>
+  </div>
+
+  <!-- ===== 双击彩蛋 ===== -->
+  <div id="dblEgg" aria-hidden="true">
+    <div class="dbl-glow"></div>
+    <div class="dbl-text">任馨雨<br>19岁生日快乐<small>HAPPY BIRTHDAY</small></div>
+  </div>
+
+  <!-- ===== 关闭 JS 时的静态祝福 ===== -->
+  <noscript>
+    <div class="nojs">
+      <div class="nbox">
+        <h1>任馨雨，19岁生日快乐 🎂</h1>
+        <p>任馨雨，19岁生日快乐呀！愿你每天都被美食和好心情包围，像粉色一样软软甜甜，永远闪闪发光 ✨</p>
+        <p>今天想吃什么都安排上！🍰🍜🍓</p>
+        <p class="sign">—— 聂凡胜</p>
+        <p style="font-size:12px;opacity:.6;margin-top:14px">开启 JavaScript 并允许麦克风权限，即可对着屏幕吹气吹灭蜡烛</p>
+      </div>
+    </div>
+  </noscript>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* =========================================================
+   工具函数
+   ========================================================= */
+var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rand(a,b){ return a + Math.random()*(b-a); }
+function randInt(a,b){ return Math.floor(rand(a,b+1)); }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+var fxLayer      = document.getElementById('fxLayer');
+var balloonLayer = document.getElementById('balloonLayer');
+var stage        = document.getElementById('stage');
+var cakeWrap     = document.getElementById('cakeWrap');
+var cakeTip      = document.getElementById('cakeTip');
+var celebrateEl  = document.getElementById('celebrate');
+var replayBtn    = document.getElementById('replayBtn');
+var intro        = document.getElementById('intro');
+
+/* =========================================================
+   模块一：粒子系统（触碰涟漪 + 美食彩蛋形状）
+   全局粒子上限 60，rAF 统一驱动 transform / opacity
+   ========================================================= */
+var Particles = (function(){
+  var MAX = 60;
+  var list = [];
+  // 美食相关形状（蛋糕/叉子/勺子）权重更高 —— 她超爱吃
+  var POOL = ['heart','heart','star','star','sparkle','cake','cake','cake','fork','spoon'];
+
+  /** 生成一个粒子；opt 可覆盖初速度、重力、寿命、指定形状 */
+  function spawn(shape, x, y, opt){
+    if(list.length >= MAX) return;
+    opt = opt || {};
+    var size = opt.size || randInt(16,30);
+    var el = document.createElement('div');
+    el.className = 'pt';
+    el.style.width = size+'px';
+    el.style.height = size+'px';
+    el.innerHTML = '<svg viewBox="0 0 24 24"><use href="#ico-'+shape+'"/></svg>';
+    fxLayer.appendChild(el);
+    list.push({
+      el: el, x: x, y: y, half: size/2,
+      vx: opt.vx !== undefined ? opt.vx : rand(-85,85),
+      vy: opt.vy !== undefined ? opt.vy : rand(-215,-95),
+      rot: rand(-40,40), vr: rand(-200,200),
+      g: opt.g !== undefined ? opt.g : 78,
+      life: 0, max: opt.max || rand(0.8,1.2)   // 0.8~1.2s 后销毁
+    });
+  }
+
+  /** 手指落点爆发一组 3~8 个粒子 */
+  function burst(x, y, opt){
+    opt = opt || {};
+    var n = opt.n || (reduceMotion ? 2 : randInt(3,8));
+    for(var i=0;i<n;i++){
+      var shape = opt.shape || pick(POOL);
+      spawn(shape, x + rand(-8,8), y + rand(-8,8), {
+        vx: rand(-130,130) * (opt.spread ? 1.9 : 1),
+        vy: rand(-250,-110),
+        g: opt.g !== undefined ? opt.g : 90
+      });
+    }
+  }
+
+  /** 每帧更新：上浮 + 旋转 + 缩放淡出，寿命到即 remove() */
+  function update(dt){
+    for(var i=list.length-1;i>=0;i--){
+      var p = list[i];
+      p.life += dt;
+      if(p.life >= p.max){ p.el.remove(); list.splice(i,1); continue; }
+      p.vy += p.g*dt; p.x += p.vx*dt; p.y += p.vy*dt; p.rot += p.vr*dt;
+      var t = p.life/p.max;
+      var s = (1 - t*0.55) * (t < 0.14 ? t/0.14 : 1);   // 出场缩放 + 逐渐变小
+      p.el.style.transform = 'translate3d('+(p.x-p.half).toFixed(1)+'px,'+(p.y-p.half).toFixed(1)+
+                             'px,0) rotate('+p.rot.toFixed(1)+'deg) scale('+s.toFixed(3)+')';
+      p.el.style.opacity = (1 - Math.pow(t,2.2)).toFixed(3);
+    }
+  }
+  function clear(){ for(var i=0;i<list.length;i++) list[i].el.remove(); list.length = 0; }
+  return { spawn:spawn, burst:burst, update:update, clear:clear, count:function(){return list.length;} };
+})();
+
+/** 触碰涟漪圆环 */
+function ripple(x,y){
+  if(reduceMotion) return;
+  var r = document.createElement('div');
+  r.className = 'ripple';
+  r.style.left = x+'px'; r.style.top = y+'px';
+  fxLayer.appendChild(r);
+  setTimeout(function(){ r.remove(); }, 760);
+}
+
+/* =========================================================
+   模块二：彩纸 confetti（纯 CSS 动画，不占粒子池）
+   ========================================================= */
+var Confetti = (function(){
+  var COLORS = ['#FFB6C1','#BDE0FE','#FFD6A5','#FFF1F5','#C9F0DD','#FF8FAB'];
+  function rain(n){
+    for(var i=0;i<n;i++){
+      var p = document.createElement('i');
+      p.className = 'confetti' + (i%4===0 ? ' ribbon' : (i%3===0 ? ' round' : ''));
+      p.style.left = rand(-2,100)+'vw';
+      p.style.background = pick(COLORS);
+      p.style.setProperty('--dx', rand(-38,38)+'vw');
+      p.style.setProperty('--rot', rand(-620,620)+'deg');
+      p.style.animationDelay = rand(0,0.7)+'s';
+      p.style.animationDuration = rand(2.5,3.9)+'s';
+      fxLayer.appendChild(p);
+      (function(node){ setTimeout(function(){ node.remove(); }, 5000); })(p);
+    }
+  }
+  return { rain: rain };
+})();
+
+/* =========================================================
+   模块三：气球（漂浮 + 拖拽 + 弹性回弹 / 飞走重生）
+   ========================================================= */
+var Balloons = (function(){
+  var list = [];
+  var NORMAL = ['#BDE0FE','#FFD6A5','#FFF1F5','#C9F0DD'];
+
+  function normalSVG(color){
+    return '<svg viewBox="0 0 64 96">'+
+      '<path d="M32 74c4 8-4 12 0 20" fill="none" stroke="#D9B4BE" stroke-width="2" stroke-linecap="round"/>'+
+      '<ellipse cx="32" cy="38" rx="27" ry="33" fill="'+color+'" stroke="#5A4A4A" stroke-width="2.2"/>'+
+      '<path d="M32 69l-6.5 9h13z" fill="'+color+'" stroke="#5A4A4A" stroke-width="2.2" stroke-linejoin="round"/>'+
+      '<ellipse cx="22" cy="26" rx="7" ry="10.5" fill="#fff" opacity=".5" transform="rotate(-22 22 26)"/>'+
+      '<path d="M32 34s-5.4-3.7-5.4-7.1a3.1 3.1 0 0 1 5.4-2 3.1 3.1 0 0 1 5.4 2c0 3.4-5.4 7.1-5.4 7.1z" fill="#FF8FAB" opacity=".85"/>'+
+      '</svg>';
+  }
+  /** 粉色卫衣造型气球（彩蛋） */
+  function hoodieSVG(){
+    return '<svg viewBox="0 0 80 106">'+
+      '<path d="M40 90c4 6-4 9 0 15" fill="none" stroke="#D9B4BE" stroke-width="2" stroke-linecap="round"/>'+
+      '<path d="M19 42C7 46 4 60 8 70c2 5 10 6 12 1l4-17z" fill="#FFB6C1" stroke="#5A4A4A" stroke-width="2.2" stroke-linejoin="round"/>'+
+      '<path d="M61 42c12 4 15 18 11 28-2 5-10 6-12 1l-4-17z" fill="#FFB6C1" stroke="#5A4A4A" stroke-width="2.2" stroke-linejoin="round"/>'+
+      '<rect x="18" y="34" width="44" height="54" rx="19" fill="#FFC9D6" stroke="#5A4A4A" stroke-width="2.2"/>'+
+      '<path d="M22 37c0-18 10-27 18-27s18 9 18 27c-8-6-28-6-36 0z" fill="#FFB6C1" stroke="#5A4A4A" stroke-width="2.2" stroke-linejoin="round"/>'+
+      '<rect x="28" y="62" width="24" height="13" rx="6.5" fill="#FFF0F4" stroke="#5A4A4A" stroke-width="1.7"/>'+
+      '<path d="M35 36v11M45 36v11" stroke="#FFF9FB" stroke-width="2.6" stroke-linecap="round"/>'+
+      '<circle cx="35" cy="49" r="2.6" fill="#FFD6A5" stroke="#5A4A4A" stroke-width="1.1"/>'+
+      '<circle cx="45" cy="49" r="2.6" fill="#BDE0FE" stroke="#5A4A4A" stroke-width="1.1"/>'+
+      '<path d="M40 56s-4.6-3.2-4.6-6.1a2.6 2.6 0 0 1 4.6-1.7 2.6 2.6 0 0 1 4.6 1.7c0 2.9-4.6 6.1-4.6 6.1z" fill="#FF8FAB" stroke="#5A4A4A" stroke-width="1.2"/>'+
+      '</svg>';
+  }
+
+  /** 重新分配锚点；飞走后从顶部重新进入 */
+  function respawn(b){
+    b.ax = rand(b.w*0.7, window.innerWidth - b.w*0.7);
+    b.ay = rand(window.innerHeight*0.15, window.innerHeight*0.60);
+    b.x = b.ax; b.y = -b.h - 30; b.fly = false;
+  }
+
+  function bind(b){
+    var sx=0, sy=0, ox=0, oy=0, lastY=0, lastT=0, vy=0, moved=0;
+    b.el.addEventListener('pointerdown', function(e){
+      e.stopPropagation(); e.preventDefault();
+      b.drag = true; b.fly = false; moved = 0;
+      sx = e.clientX; sy = e.clientY; ox = b.x; oy = b.y;
+      lastY = e.clientY; lastT = performance.now(); vy = 0;
+      b.el.classList.add('grab');
+      try{ b.el.setPointerCapture(e.pointerId); }catch(_){}
+    });
+    b.el.addEventListener('pointermove', function(e){
+      if(!b.drag) return;
+      var now = performance.now(), dt = Math.max(0.016,(now-lastT)/1000);
+      b.x = ox + (e.clientX - sx);
+      b.y = oy + (e.clientY - sy);
+      moved = Math.max(moved, Math.hypot(e.clientX-sx, e.clientY-sy));
+      vy = (e.clientY - lastY)/dt; lastY = e.clientY; lastT = now;
+    });
+    function release(){
+      if(!b.drag) return;
+      b.drag = false; b.el.classList.remove('grab');
+      if(b.kind === 'hoodie' && moved < 10){
+        // 粉色卫衣彩蛋：抖动 + 弹出小爱心
+        b.el.classList.remove('shake'); void b.el.offsetWidth; b.el.classList.add('shake');
+        Particles.burst(b.x, b.y - b.h*0.3, {n:6, shape:'heart'});
+      }else if(moved < 10){
+        Particles.burst(b.x, b.y, {n:4});
+      }else if(vy < -320 || b.y < window.innerHeight*0.2){
+        // 向上甩出或已在高位 → 缓慢上升飞走
+        b.fly = true; b.flySpeed = rand(110,190);
+        Particles.burst(b.x, b.y + b.h*0.4, {n:3, shape:'sparkle'});
+      }
+      // 其余情况交给 update() 做弹性回弹
+    }
+    b.el.addEventListener('pointerup', release);
+    b.el.addEventListener('pointercancel', release);
+  }
+
+  function create(kind, delay){
+    var el = document.createElement('div');
+    el.className = 'balloon' + (kind === 'hoodie' ? ' hoodie' : '');
+    el.setAttribute('data-no-ripple','');
+    el.setAttribute('aria-hidden','true');
+    var b = {
+      el: el, kind: kind,
+      w: kind === 'hoodie' ? 74 : 58,
+      h: kind === 'hoodie' ? 100 : 88,
+      x:0, y:0, ax:0, ay:0, drag:false, fly:false, flySpeed:140,
+      ph: rand(0,6.28), amp: rand(9,20), sw: rand(0.5,1.0)
+    };
+    el.style.width = b.w+'px'; el.style.height = b.h+'px';
+    el.innerHTML = kind === 'hoodie' ? hoodieSVG() : normalSVG(pick(NORMAL));
+    balloonLayer.appendChild(el);
+    list.push(b); bind(b); respawn(b);
+    if(delay) el.style.opacity = '0', setTimeout(function(){ el.style.transition='opacity .8s ease'; el.style.opacity='1'; }, delay);
+    return b;
+  }
+
+  /** 每帧：漂浮漂移 / 弹性回锚 / 上升飞走后重生 */
+  function update(dt, t){
+    for(var i=0;i<list.length;i++){
+      var b = list[i];
+      if(b.drag){ /* 拖拽时位置由 pointermove 直接写入 */ }
+      else if(b.fly){
+        b.y -= b.flySpeed*dt;
+        b.x += Math.sin(t*1.7 + b.ph)*28*dt;
+        if(b.y < -b.h - 50) respawn(b);
+      }else{
+        var k = Math.min(1, 4.2*dt);   // 弹性回弹
+        b.x += (b.ax - b.x)*k;
+        b.y += (b.ay - b.y)*k;
+      }
+      var ox = Math.sin(t*b.sw + b.ph)*b.amp;
+      var oy = Math.cos(t*b.sw*0.8 + b.ph)*b.amp*0.5;
+      var rot = Math.sin(t*b.sw + b.ph)*7;
+      b.el.style.transform = 'translate3d('+Math.round(b.x+ox-b.w/2)+'px,'+Math.round(b.y+oy-b.h/2)+
+                             'px,0) rotate('+rot.toFixed(1)+'deg)';
+    }
+  }
+  return { create:create, update:update };
+})();
+
+/* =========================================================
+   模块四：祝福卡片横向滑动（3 句切换）
+   ========================================================= */
+var Swiper = (function(){
+  var track = document.getElementById('track');
+  var slides = Array.prototype.slice.call(track.children);
+  var dotsBox = document.getElementById('dots');
+  var idx = 0, dragging = false, startX = 0, dx = 0;
+
+  slides.forEach(function(_, i){
+    var d = document.createElement('button');
+    d.type = 'button'; d.className = 'dot'; d.setAttribute('aria-label','第'+(i+1)+'句祝福');
+    d.addEventListener('click', function(e){ e.stopPropagation(); go(i); });
+    dotsBox.appendChild(d);
+  });
+
+  function render(extra){
+    track.style.transform = 'translateX(calc('+(-idx*100)+'% + '+(extra||0)+'px))';
+  }
+  function go(i){
+    idx = Math.max(0, Math.min(slides.length-1, i));
+    track.style.transition = 'transform .5s var(--bounce)';
+    render(0);
+    Array.prototype.forEach.call(dotsBox.children, function(d,k){ d.classList.toggle('on', k===idx); });
+  }
+
+  track.addEventListener('pointerdown', function(e){
+    dragging = true; startX = e.clientX; dx = 0;
+    track.style.transition = 'none';
+  });
+  window.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+    dx = e.clientX - startX;
+    render(dx * 0.85);   // 轻微阻尼，手感更软
+  });
+  window.addEventListener('pointerup', function(){
+    if(!dragging) return;
+    dragging = false;
+    if(Math.abs(dx) > 44) go(idx + (dx < 0 ? 1 : -1)); else go(idx);
+  });
+  window.addEventListener('pointercancel', function(){ if(dragging){ dragging=false; go(idx); } });
+
+  go(0);
+  track.style.transition = 'transform .5s var(--bounce)';
+  return { go:go };
+})();
+
+/* =========================================================
+   模块五：吹气检测（Web Audio API 分析麦克风低频能量）
+   吹气特征：音量明显高于环境底噪 + 低频占比高（气流噪声）
+   ========================================================= */
+var Blow = (function(){
+  var ctx = null, analyser = null, freqData = null, stream = null;
+  var running = false, denied = false;
+  var baseline = 0, samples = 0, calibrating = false;
+  var level = 0;          // 当前吹气强度 0~1（对外提供，用于指示条）
+  var onBlow = null;      // 检测到有效吹气时的回调
+  var onLevel = null;     // 每帧强度回调（画指示条）
+
+  var micBtn   = document.getElementById('micBtn');
+  var meter    = document.getElementById('blowMeter');
+  var fill     = document.getElementById('blowFill');
+  var label    = document.getElementById('blowLabel');
+
+  var BLOW_THRESHOLD = 0.46;   // 归一化强度阈值：超过才算在吹气（数值越大越不灵敏）
+  var LOW_RATIO = 0.68;        // 低频能量占比阈值：吹气以低频为主，说话/音乐偏高频
+  var KEEP_RATIO = 0.72;       // 迟滞系数：强度低于阈值的该比例才开始衰减，避免临界抖动
+
+  /** 启动麦克风；必须在用户手势内调用（iOS 限制） */
+  function start(){
+    if(running) return Promise.resolve(true);
+    if(denied) return Promise.resolve(false);
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !window.AudioContext){
+      denied = true; setBtnState('denied','麦克风不可用'); return Promise.resolve(false);
+    }
+    var AC = window.AudioContext || window.webkitAudioContext;
+    return navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})
+      .then(function(s){
+        stream = s;
+        ctx = new AC();
+        if(ctx.state === 'suspended') ctx.resume();
+        var src = ctx.createMediaStreamSource(s);
+        analyser = ctx.createAnalyser();
+        analyser.fftSize = 1024;
+        analyser.smoothingTimeConstant = 0.7;
+        src.connect(analyser);            // 不接 destination，避免回授啸叫
+        freqData = new Uint8Array(analyser.frequencyBinCount);
+        running = true; calibrating = true; baseline = 0; samples = 0;
+        setBtnState('listening','🎤 正在聆听…');
+        meter.classList.add('on');
+        label.textContent = '吹气力度';
+        return true;
+      })
+      .catch(function(){
+        denied = true; running = false;
+        setBtnState('denied','👆 点蜡烛吹灭');
+        label.textContent = '请用手指点蜡烛';
+        meter.classList.add('on');
+        return false;
+      });
+  }
+
+  function setBtnState(cls, text){
+    micBtn.classList.remove('listening','denied');
+    if(cls) micBtn.classList.add(cls);
+    micBtn.textContent = text;
+  }
+
+  /** 每帧分析：计算归一化吹气强度（低频占比 × 超出底噪的幅度） */
+  function update(dt){
+    if(!running || !analyser) return;
+    analyser.getByteFrequencyData(freqData);
+    var n = freqData.length;
+    // 吹气主要集中在低频段（约前 1/6 的 bin）
+    var lowEnd = Math.max(6, Math.floor(n/6));
+    var low = 0, all = 0, i;
+    for(i=0;i<lowEnd;i++) low += freqData[i];
+    for(i=0;i<n;i++)      all += freqData[i];
+    var lowAvg = low/lowEnd/255;          // 0~1
+    var allAvg = all/n/255;               // 0~1
+
+    // 采样环境底噪（约 1.2s），用于自适应不同环境
+    if(calibrating){
+      baseline += lowAvg; samples++;
+      if(samples >= 45){ baseline /= samples; calibrating = false; }
+    }
+    var floor = Math.max(0.05, baseline);
+    var ratio = allAvg > 0.001 ? (low/lowEnd)/(all/n) : 0;   // 低频占比
+    // 超出底噪的相对幅度，映射到 0~1（分母越大越不灵敏）
+    var amp = Math.min(1, Math.max(0, (lowAvg - floor) / (floor*2.2 + 0.22)));
+    var isLow = ratio >= LOW_RATIO;
+    level = isLow ? amp : amp*0.22;   // 高频为主（说话/音乐）时大幅衰减，避免误触
+
+    if(onLevel) onLevel(level, dt);
+    if(level >= BLOW_THRESHOLD && onBlow) onBlow(level, dt);
+  }
+
+  micBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(running) return;
+    denied = false; setBtnState('', '🎤 开启吹气');
+    start();
+  });
+
+  /** 页面隐藏时释放麦克风，省电也避免指示灯常亮 */
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden && stream){
+      stream.getTracks().forEach(function(t){ t.stop(); });
+      if(ctx && ctx.state !== 'closed') ctx.close();
+      stream = null; ctx = null; analyser = null; running = false;
+      setBtnState('', '🎤 重新开启吹气');
+    }
+  });
+
+  return {
+    start: start,
+    update: update,
+    isRunning: function(){ return running; },
+    isDenied:  function(){ return denied; },
+    level:     function(){ return level; },
+    threshold: function(){ return BLOW_THRESHOLD; },
+    keepRatio: function(){ return KEEP_RATIO; },
+    onBlow:    function(fn){ onBlow = fn; },
+    onLevel:   function(fn){ onLevel = fn; },
+    setMeter:  function(strong){ meter.classList.toggle('strong', !!strong); }
+  };
+})();
+
+/* =========================================================
+   模块六：蜡烛（吹气逐根熄灭 → 全部熄灭触发庆祝）
+   持续吹气累计达标即灭一根；无麦克风时可点按蜡烛降级
+   ========================================================= */
+var Cake = (function(){
+  var candles = Array.prototype.slice.call(cakeWrap.querySelectorAll('.candle'));
+  var total = candles.length, out = 0, done = false;
+  var charge = 0;                 // 吹气累积量
+  var CHARGE_NEED = 0.85;         // 每灭一根需要的累积秒数（越大越不灵敏）
+  var CHARGE_DECAY = 1.9;         // 停止吹气后的衰减速率，防止零星噪声慢慢攒满
+  var blowingTimer = null;
+  var fill = document.getElementById('blowFill');   // 吹气指示条填充元素（本模块私有引用）
+
+  /** 熄灭指定蜡烛（默认灭下一根未灭的） */
+  function blow(g){
+    if(!g){ for(var i=0;i<candles.length;i++){ if(!candles[i].classList.contains('out')){ g = candles[i]; break; } } }
+    if(!g || g.classList.contains('out')) return;
+    g.classList.add('out'); g.classList.remove('blowing');
+    var r = g.getBoundingClientRect();
+    Particles.burst(r.left + r.width/2, r.top + 6, {n:5, shape:'sparkle', g:40});
+    out++; charge = 0;
+    cakeTip.textContent = (total - out) > 0
+      ? (Blow.isRunning() ? ('继续吹气～还剩 '+(total-out)+' 根 🕯️') : ('还剩 '+(total-out)+' 根蜡烛 🕯️'))
+      : '愿望收到啦！';
+    if(out >= total && !done){ done = true; celebrate(); }
+  }
+
+  /** 吹气回调：累积吹气时长，火苗同时被吹得歪斜 */
+  Blow.onBlow(function(level, dt){
+    if(done) return;
+    Blow.setMeter(true);
+    // 累积速率以阈值为基准：刚过阈值约 1.0 倍速，用力吹最快 1.8 倍速
+    charge += dt * Math.min(1.8, level/Blow.threshold());
+    // 火苗受风效果
+    var next = null;
+    for(var i=0;i<candles.length;i++){ if(!candles[i].classList.contains('out')){ next = candles[i]; break; } }
+    candles.forEach(function(c){ c.classList.remove('blowing'); });
+    if(next) next.classList.add('blowing');
+    clearTimeout(blowingTimer);
+    blowingTimer = setTimeout(function(){ candles.forEach(function(c){ c.classList.remove('blowing'); }); }, 220);
+    if(charge >= CHARGE_NEED) blow(next);
+  });
+
+  /** 强度回调：驱动指示条，并在未达阈值时衰减累积量 */
+  Blow.onLevel(function(level, dt){
+    // 指示条以阈值为满格基准，方便看清要吹到多大才有效
+    var pct = Math.max(0, Math.min(100, Math.round(level/Blow.threshold()*100)));
+    fill.style.width = pct + '%';
+    if(level < Blow.threshold()){
+      Blow.setMeter(false);
+      // 低于迟滞线才开始衰减：临界强度不会把已吹进度清零，但零星噪声攒不满
+      if(charge > 0 && level < Blow.threshold()*Blow.keepRatio()){
+        charge = Math.max(0, charge - (dt || 0.016)*CHARGE_DECAY);
+      }
+    }
+  });
+
+  /** 降级交互：麦克风不可用时，点按蜡烛也能吹灭 */
+  candles.forEach(function(g){
+    g.addEventListener('pointerdown', function(e){
+      e.stopPropagation(); e.preventDefault();
+      if(Blow.isRunning() && !Blow.isDenied()){
+        // 已开启吹气模式：点按直接灭该根，作为备用
+        blow(g);
+      }else{
+        g.classList.add('blowing');
+        blow(g);
+      }
+    });
+  });
+
+  /** 庆祝：蛋糕弹跳 + 彩纸洒落 + 祝福卡片浮现，4s 后出现重玩按钮 */
+  function celebrate(){
+    candles.forEach(function(c){ c.classList.remove('blowing'); });
+    cakeWrap.classList.add('bounce');
+    Confetti.rain(reduceMotion ? 12 : 50);
+    setTimeout(function(){
+      celebrateEl.classList.add('on');
+      celebrateEl.setAttribute('aria-hidden','false');
+      Particles.burst(window.innerWidth/2, window.innerHeight*0.34, {n:10, spread:true});
+    }, 380);
+    setTimeout(function(){ replayBtn.classList.add('show'); }, 4000);
+  }
+
+  /** 重玩：重新点亮蜡烛 */
+  function reset(){
+    celebrateEl.classList.remove('on');
+    celebrateEl.setAttribute('aria-hidden','true');
+    replayBtn.classList.remove('show');
+    cakeWrap.classList.remove('bounce');
+    candles.forEach(function(c){ c.classList.remove('out','blowing'); });
+    out = 0; done = false; charge = 0;
+    cakeTip.textContent = Blow.isRunning() ? '再吹一次，许个愿 🕯️' : '再许一次愿 🕯️';
+    Confetti.rain(reduceMotion ? 6 : 18);
+  }
+  replayBtn.addEventListener('click', function(e){ e.stopPropagation(); reset(); });
+  return { reset:reset, blow:blow };
+})();
+
+/* =========================================================
+   模块七：双击彩蛋（大号手写风文字 + 全屏光晕闪烁 2s）
+   ========================================================= */
+var DoubleTap = (function(){
+  var egg = document.getElementById('dblEgg');
+  var last = 0, lx = 0, ly = 0, timer = null;
+  function show(){
+    egg.classList.remove('on'); void egg.offsetWidth; egg.classList.add('on');
+    Particles.burst(window.innerWidth/2, window.innerHeight*0.42, {n:reduceMotion?3:12, spread:true});
+    clearTimeout(timer);
+    timer = setTimeout(function(){ egg.classList.remove('on'); }, 2000);
+  }
+  return {
+    check: function(e){
+      var now = performance.now();
+      if(now - last < 330 && Math.hypot(e.clientX-lx, e.clientY-ly) < 50){ show(); last = 0; }
+      else { last = now; lx = e.clientX; ly = e.clientY; }
+    }
+  };
+})();
+
+/* =========================================================
+   模块八：全局触摸入口（涟漪 + 粒子 + 双击判定）
+   Pointer Events 同时覆盖 touch 与 mouse
+   ========================================================= */
+document.addEventListener('pointerdown', function(e){
+  DoubleTap.check(e);
+  if(e.target.closest && e.target.closest('[data-no-ripple]')) return;
+  ripple(e.clientX, e.clientY);
+  Particles.burst(e.clientX, e.clientY);
+}, {passive:true});
+
+/* =========================================================
+   模块九：主循环（单一 rAF 驱动所有动画实体与音频采样）
+   ========================================================= */
+var lastT = performance.now(), clock = 0;
+function frame(now){
+  var dt = Math.min((now - lastT)/1000, 0.05);
+  lastT = now; clock += dt;
+  Blow.update(dt);          // 麦克风吹气检测
+  Particles.update(dt);
+  Balloons.update(dt, clock);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* =========================================================
+   模块十：开场屏 → 主场景（错开 stagger 入场）
+   ========================================================= */
+(function initIntro(){
+  // 复用主场景蛋糕 SVG，避免重复代码
+  var src = cakeWrap.querySelector('svg.cake');
+  if(src && document.getElementById('introCake')){
+    var clone = src.cloneNode(true);
+    clone.removeAttribute('class');
+    clone.setAttribute('aria-hidden','true');
+    Array.prototype.forEach.call(clone.querySelectorAll('.candle'), function(c){ c.removeAttribute('data-no-ripple'); });
+    document.getElementById('introCake').appendChild(clone);
+  }
+
+  function enter(){
+    if(intro.classList.contains('gone')) return;
+    intro.classList.add('gone');
+    setTimeout(function(){ if(intro.parentNode) intro.remove(); }, 720);
+    stage.classList.add('on');
+    // 必须在用户手势内申请麦克风（iOS/Safari 强制要求）
+    Blow.start();
+    // 生成气球：3 个普通 + 1 个粉色卫衣彩蛋
+    Balloons.create('normal', 120);
+    Balloons.create('normal', 260);
+    Balloons.create('normal', 400);
+    Balloons.create('hoodie', 540);
+    // 入场礼花
+    setTimeout(function(){
+      Confetti.rain(reduceMotion ? 8 : 26);
+      Particles.burst(window.innerWidth*0.5, window.innerHeight*0.3, {n:8, spread:true});
+    }, 420);
+  }
+  intro.addEventListener('pointerdown', function(e){ e.preventDefault(); enter(); });
+})();
+
+})();
+</script>
+</body>
+</html>
